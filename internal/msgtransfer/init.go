@@ -194,7 +194,7 @@ func (m *MsgTransfer) Start(index int, config *Config, client discovery.SvcDisco
 
 			etcdClient := client.(*etcd.SvcDiscoveryRegistryImpl).GetClient()
 
-			_, err = etcdClient.Put(context.TODO(), prommetrics.BuildDiscoveryKey(prommetrics.MessageTransferKeyName), jsonutil.StructToJsonString(prommetrics.BuildDefaultTarget(registerIP, prometheusPort)))
+			_, err = etcdClient.Put(context.TODO(), prommetrics.BuildDiscoveryKey(prommetrics.MessageTransferKeyName, registerIP, prometheusPort), jsonutil.StructToJsonString(prommetrics.BuildDefaultTarget(registerIP, prometheusPort)))
 			if err != nil {
 				return errs.WrapMsg(err, "etcd put err")
 			}

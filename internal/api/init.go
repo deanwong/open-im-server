@@ -109,7 +109,7 @@ func Start(ctx context.Context, index int, config *Config) error {
 
 			etcdClient := client.(*etcd.SvcDiscoveryRegistryImpl).GetClient()
 
-			_, err = etcdClient.Put(ctx, prommetrics.BuildDiscoveryKey(prommetrics.APIKeyName), jsonutil.StructToJsonString(prommetrics.BuildDefaultTarget(registerIP, prometheusPort)))
+			_, err = etcdClient.Put(ctx, prommetrics.BuildDiscoveryKey(prommetrics.APIKeyName, registerIP, prometheusPort), jsonutil.StructToJsonString(prommetrics.BuildDefaultTarget(registerIP, prometheusPort)))
 			if err != nil {
 				return errs.WrapMsg(err, "etcd put err")
 			}
